@@ -10,6 +10,7 @@ const themeToggleBtn = document.getElementById("theme-toggle");
 const btnAll = document.querySelector(".buttons .all");
 const btnActive = document.querySelector(".buttons .active");
 const btnCompleted = document.querySelector(".buttons .completed");
+const btnClear = document.querySelector(".buttons .clear");
 
 // ===== storage helpers =====
 const loadTasks = () => {
@@ -144,4 +145,11 @@ if (btnActive) btnActive.addEventListener("click", () => setFilter("active"));
 if (btnCompleted)
   btnCompleted.addEventListener("click", () => setFilter("completed"));
 
+btnClear.addEventListener("click", clearCompleted);
+
+function clearCompleted() {
+  tasks = tasks.filter((t) => !t.isCompleted);
+  saveTasks(tasks);
+  renderTaskList();
+}
 renderTaskList();
