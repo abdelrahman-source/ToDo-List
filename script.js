@@ -11,7 +11,13 @@ const btnAll = document.querySelector(".buttons .all");
 const btnActive = document.querySelector(".buttons .active");
 const btnCompleted = document.querySelector(".buttons .completed");
 const btnClear = document.querySelector(".buttons .clear");
-
+// =======dark mode toggle=======
+const body = document.body;
+const lists = document.querySelector(".Lists");
+const inputField = document.querySelector(".input");
+const sunIcon = document.querySelector(".first-img.dark");
+const moonIcon = document.querySelector(".first-img.light");
+const bgImg = document.querySelector(".background-pic");
 // ===== storage helpers =====
 const loadTasks = () => {
   try {
@@ -199,4 +205,55 @@ function getDragAfterElement(container, y) {
   ).element;
 }
 
+function setTheme(isDark) {
+  if (isDark) {
+    body.classList.add("dark-body");
+    body.classList.remove("light-body");
+    lists.classList.add("darkList");
+    lists.classList.remove("lightList");
+    inputField.classList.add("darkInput");
+    inputField.classList.remove("lightInput");
+    sunIcon.style.display = "block";
+    moonIcon.style.display = "none";
+  } else {
+    body.classList.add("light-body");
+    body.classList.remove("dark-body");
+    lists.classList.add("lightList");
+    lists.classList.remove("darkList");
+    inputField.classList.add("lightInput");
+    inputField.classList.remove("darkInput");
+    sunIcon.style.display = "none";
+    moonIcon.style.display = "block";
+  }
+}
+
+// افتراضي داكن
+setTheme(true);
+
+sunIcon.addEventListener("click", () => setTheme(false));
+moonIcon.addEventListener("click", () => setTheme(true));
+
+function setTheme(isDark) {
+  if (isDark) {
+    body.classList.add("dark-body");
+    body.classList.remove("light-body");
+    lists.classList.add("darkList");
+    lists.classList.remove("lightList");
+    inputField.classList.add("darkInput");
+    inputField.classList.remove("lightInput");
+    sunIcon.style.display = "block";
+    moonIcon.style.display = "none";
+    if (bgImg) bgImg.src = "images/bg-desktop-dark.jpg"; // صورة الدارك مود
+  } else {
+    body.classList.add("light-body");
+    body.classList.remove("dark-body");
+    lists.classList.add("lightList");
+    lists.classList.remove("darkList");
+    inputField.classList.add("lightInput");
+    inputField.classList.remove("darkInput");
+    sunIcon.style.display = "none";
+    moonIcon.style.display = "block";
+    if (bgImg) bgImg.src = "images/bg-desktop-light.jpg"; // صورة اللايت مود
+  }
+}
 renderTaskList();

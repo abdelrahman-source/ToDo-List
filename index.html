@@ -29,26 +29,34 @@
       }
     </style>
   </head>
-  <body>
+  <body class="dark-body">
     <div class="container">
       <img class="background-pic" src="images/bg-desktop-light.jpg" alt="" />
 
       <header>
         <h1>TODO</h1>
-
-        <img src="./images/icon-moon.svg" alt="sun icon" />
+        <img
+          class="first-img light"
+          src="./images/icon-moon.svg"
+          alt="moon icon"
+        />
+        <img
+          class="first-img dark"
+          src="./images/icon-sun.svg"
+          alt="moon icon"
+        />
       </header>
       <main>
         <div class="input-container">
           <div type="button" class="circle"></div>
           <input
-            class="sameinput input"
+            class="sameinput input darkInput"
             type="text"
             placeholder="Create a new todo..."
           />
         </div>
       </main>
-      <div class="Lists">
+      <div class="Lists darkList">
         <ul class="uList"></ul>
         <p class="noMoreLeft">There's No ToDo Yet...</p>
         <div class="buttonsBar">

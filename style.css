@@ -343,3 +343,63 @@ button:hover {
     gap: 10px;
   }
 }
+.dark {
+  display: none;
+}
+
+.darkList {
+  background-color: var(--Navy-900);
+}
+
+.listItem {
+  color: var(--Gray-50);
+  border-bottom: 1px solid var(--Purple-800);
+}
+
+.darkInput {
+  background-color: var(--Navy-900);
+  color: var(--Gray-50);
+}
+
+.dark-body {
+  background-color: var(--Navy-950);
+}
+
+.circle {
+  background: linear-gradient(var(--Navy-900), var(--Navy-900)) padding-box,
+    linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4) border-box;
+}
+
+body.light-body {
+  background-color: var(--background-color);
+}
+.Lists.lightList {
+  background-color: white;
+}
+.input.lightInput {
+  background-color: white;
+  color: var(--text-color);
+}
+
+body.dark-body .circle {
+  background: linear-gradient(var(--Navy-900), var(--Navy-900)) padding-box,
+    linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4) border-box;
+  border: 2px solid transparent;
+}
+
+body.light-body .circle {
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4) border-box;
+  border: 2px solid transparent;
+}
+
+body.light-body .listItem {
+  color: var(--Navy-850);
+  border-bottom: 1px solid var(--Gray-300);
+}
+
+/* لون النص في الدارك مود */
+body.dark-body .listItem {
+  color: var(--Gray-50);
+  border-bottom: 1px solid var(--Purple-800);
+}
