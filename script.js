@@ -5,7 +5,7 @@ const taskListEl = document.querySelector(".uList");
 const noMoreLeft = document.querySelector(".noMoreLeft");
 const itemsLeft = document.querySelector(".total-left");
 const themeToggleBtn = document.getElementById("theme-toggle");
-
+const draggableList = document.getElementsByClassName(".listItem");
 // ========== buttons ==========
 const btnAll = document.querySelector(".buttons .all");
 const btnActive = document.querySelector(".buttons .active");
@@ -43,9 +43,9 @@ const renderTaskList = () => {
   const html = toRender
     .map(
       (t) => `
-      <li class="listItem ${t.isCompleted ? "completed" : ""}" data-index="${
-        t.index
-      }">
+      <li draggable="true" class="listItem ${
+        t.isCompleted ? "completed" : ""
+      }" data-index="${t.index}">
         <div class="circle">
           <img class="checkmark" src="./images/icon-check.svg" alt="check" />
         </div>
@@ -64,6 +64,8 @@ const renderTaskList = () => {
   itemsLeft.innerText = tasks.filter((t) => !t.isCompleted).length;
 
   updateFilterButtonsUI();
+
+  addDragAndDropEvents();
 };
 
 // ===== helpers =====
@@ -152,4 +154,49 @@ function clearCompleted() {
   saveTasks(tasks);
   renderTaskList();
 }
+
+function addDragAndDropEvents() {
+  const listItems = document.querySelectorAll(".listItem");
+
+  listItems.forEach((item) => {
+    item.addEventListener("dragstart", () => {
+      item.classList.add("dragging");
+    });
+
+    item.addEventListener("dragend", () => {
+      item.classList.remove("dragging");
+    });
+  });
+
+  taskListEl.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const dragging = document.querySelector(".dragging");
+    const afterElement = getDragAfterElement(taskListEl, e.clientY);
+    if (afterElement == null) {
+      taskListEl.appendChild(dragging);
+    } else {
+      taskListEl.insertBefore(dragging, afterElement);
+    }
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".listItem:not(.dragging)"),
+  ];
+
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
+}
+
 renderTaskList();
